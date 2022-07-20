@@ -11,6 +11,7 @@ window.Vue = require('vue').default;
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+
 Vue.use(VueRouter)
 /**
  * The following block of code may be used to automatically register your
@@ -25,11 +26,13 @@ Vue.use(VueRouter)
 
 // Vue.component('form-component', require('./components/tasks/FormComponent.vue').default); vue sin vue-router
 // Vue.component('list-component', require('./components/tasks/ListComponent.vue').default);
+// Vue.component('pagination', require('laravel-vue-pagination'));
 
 
 import FormComponent from './components/tasks/FormComponent.vue';
 import ListComponent from './components/tasks/ListComponent.vue';
 import HomeComponent from './components/tasks/HomeComponent.vue';
+import EditComponent from './components/tasks/EditComponent.vue';
 
 
 const routes = [
@@ -44,6 +47,9 @@ const routes = [
     { 
         path:'/home',
         component: HomeComponent,
+
+        path: '/edit/:id',
+        component: EditComponent
     }
 ];
 

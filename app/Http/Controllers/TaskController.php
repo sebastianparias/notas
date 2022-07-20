@@ -14,7 +14,9 @@ class TaskController extends Controller
      */
     public function index(Request $request)
     {
+        // $tasks = Task::paginate(5);
         $tasks = Task::all();
+
         return response()->json($tasks);
 
 
@@ -61,7 +63,8 @@ class TaskController extends Controller
      */
     public function edit($id)
     {
-        //
+        $task = Task::find($id);
+        return response()->json($task);
     }
 
     /**
@@ -73,7 +76,14 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // $task = Task::find($id);
+        // $task->todo = $request['todo'];
+        // $task->completed = $request['completed'];
+        // $task->update();
+        $task = Task::find($id);
+        $task->update([
+            'todo' => $request['todo']
+        ]);
     }
 
     /**
@@ -84,6 +94,6 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Task::find($id)->delete();
     }
 }
