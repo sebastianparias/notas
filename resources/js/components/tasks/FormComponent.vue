@@ -2,23 +2,15 @@
   <div class="container text-center bg-light mt-2">
     <h1>Crear tarea</h1>
     <form method="POST" v-on:submit.prevent="saveTask()">
-      <div class="row">
-        <div class="col-11">
-          <input
-            v-model="task"
-            type="text-area"
-            class="form-control"
-            id="description"
-            placeholder="Nueva tarea"
-          />
-        </div>
-
-        <div class="col">
-          <button type="submit" class="btn btn-primary">Guardar</button>
-        </div>
-      </div>
+      <input
+        v-model="task"
+        type="text-area"
+        class="form-control"
+        id="description"
+        placeholder="Nueva tarea"
+      />
+      <input type="submit" class="btn btn-primary" value="Submit" />
     </form>
-    <br />
   </div>
 </template>
 
@@ -32,15 +24,18 @@ export default {
   methods: {
     saveTask() {
       axios
-        .post("/tasks", { todo: this.task })
-        .then((response) => {
+        .post("/tasks", {
+          todo: this.task,
+          completed: 0,
+        })
+        .then(function (response) {
           console.log(response);
         })
-        .catch((error) => {
-          console.log(error.response);
+        .catch(function (error) {
+          console.log(error);
         });
       this.task = "";
-      this.$router.push('/tasks');
+      this.$router.push("/tasks");
     },
   },
 };
