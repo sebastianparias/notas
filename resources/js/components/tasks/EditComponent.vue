@@ -21,7 +21,7 @@ export default {
   data() {
     return {
       id: this.$route.params.id,
-      task: []
+      task: {}
     };
   },
 
@@ -34,14 +34,16 @@ export default {
   methods: {
     editTask() {
       axios
-        .put('/tasks/'+this.id, { todo: this.task.todo })
-        .then((response) => {
+        .put('/tasks/'+this.id, { 
+          todo: this.task.todo,
+          completed: this.task.completed
+           })
+        .then(response => {
           console.log(response);
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error.response);
         });
-      this.task.todo = "";
       this.$router.push('/tasks');
     },
   },
