@@ -12,25 +12,11 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        // $tasks = Task::paginate(5);
         $tasks = Task::all();
 
         return response()->json($tasks);
-
-
-
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -42,17 +28,6 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         Task::create($request->all());
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -76,12 +51,9 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $task = Task::find($id);
-        // $task->todo = $request['todo'];
-        // $task->completed = $request['completed'];
-        // $task->update();
         $task = Task::find($id);
         $task->update([
+            'completed' => $request['completed'],
             'todo' => $request['todo']
         ]);
     }

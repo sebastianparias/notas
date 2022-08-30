@@ -21,17 +21,9 @@ Vue.use(VueRouter)
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
-// Vue.component('form-component', require('./components/tasks/FormComponent.vue').default); vue sin vue-router
-// Vue.component('list-component', require('./components/tasks/ListComponent.vue').default);
-// Vue.component('pagination', require('laravel-vue-pagination'));
-
 
 import FormComponent from './components/tasks/FormComponent.vue';
 import ListComponent from './components/tasks/ListComponent.vue';
-import HomeComponent from './components/tasks/HomeComponent.vue';
 import EditComponent from './components/tasks/EditComponent.vue';
 
 
@@ -45,9 +37,6 @@ const routes = [
         component: ListComponent,
     },
     { 
-        path:'/home',
-        component: HomeComponent,
-
         path: '/edit/:id',
         component: EditComponent
     }

@@ -63,8 +63,8 @@ export default {
       }
       axios
         .put("/tasks/" + task.id, {
-          task: task.todo,
-          completed: complete,
+          todo: task.todo,
+          completed: complete
         })
         .then((response) => {
           console.log(response);
@@ -72,7 +72,6 @@ export default {
         .catch((error) => {
           console.log(error.response);
         });
-      // this.task.todo = "";
       this.getTasks();
     },
     deleteTask(id) {

@@ -34,7 +34,10 @@ export default {
   methods: {
     editTask() {
       axios
-        .put('/tasks/'+this.id, { todo: this.task.todo })
+        .put('/tasks/'+this.task.id, { 
+          todo: this.task.todo,
+          completed: this.task.completed
+         })
         .then((response) => {
           console.log(response);
         })

@@ -9,7 +9,7 @@
         id="description"
         placeholder="Nueva tarea"
       />
-      <input type="submit" class="btn btn-primary" value="Submit" />
+      <input type="submit" class="btn btn-primary" value="Enviar" />
     </form>
   </div>
 </template>
@@ -34,7 +34,6 @@ export default {
         .catch(function (error) {
           console.log(error);
         });
-      this.task = "";
       this.$router.push("/tasks");
     },
   },
