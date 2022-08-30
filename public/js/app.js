@@ -5270,7 +5270,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       id: this.$route.params.id,
-      task: []
+      task: {}
     };
   },
   created: function created() {
@@ -5282,7 +5282,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     editTask: function editTask() {
-      axios.put('/tasks/' + this.task.id, {
+      axios.put('/tasks/' + this.id, {
         todo: this.task.todo,
         completed: this.task.completed
       }).then(function (response) {
@@ -5290,7 +5290,6 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log(error.response);
       });
-      this.task.todo = "";
       this.$router.push('/tasks');
     }
   }
@@ -5312,20 +5311,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      task: ""
+      task: ''
     };
   },
   methods: {
     saveTask: function saveTask() {
-      axios.post("/tasks", {
-        todo: this.task,
-        completed: 0
+      axios.post('/tasks', {
+        todo: this.task
       }).then(function (response) {
         console.log(response);
       })["catch"](function (error) {
-        console.log(error);
+        console.log(error.response);
       });
       this.$router.push("/tasks");
+      this.task = "";
     }
   }
 });
@@ -5357,11 +5356,11 @@ __webpack_require__.r(__webpack_exports__);
     this.getTasks();
   },
   methods: {
-    // getTasks(page = 1) {
     getTasks: function getTasks() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get("/tasks").then(function (response) {
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/tasks?page=' + page).then(function (response) {
         return _this.tasks = response.data;
       })["catch"](function (error) {
         console.log(error.response);
@@ -5374,7 +5373,7 @@ __webpack_require__.r(__webpack_exports__);
         var complete = 0;
       }
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().put("/tasks/" + task.id, {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().put('/tasks/' + task.id, {
         todo: task.todo,
         completed: complete
       }).then(function (response) {
@@ -5501,7 +5500,7 @@ var render = function render() {
         return _vm.saveTask();
       }
     }
-  }, [_c("input", {
+  }, [_c("div", [_c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -5510,9 +5509,10 @@ var render = function render() {
     }],
     staticClass: "form-control",
     attrs: {
-      type: "text-area",
+      type: "text",
       id: "description",
-      placeholder: "Nueva tarea"
+      placeholder: "Nueva tarea",
+      name: "todo"
     },
     domProps: {
       value: _vm.task
@@ -5527,9 +5527,9 @@ var render = function render() {
     staticClass: "btn btn-primary",
     attrs: {
       type: "submit",
-      value: "Enviar"
+      value: "Save"
     }
-  })])]);
+  })])])]);
 };
 
 var staticRenderFns = [];
